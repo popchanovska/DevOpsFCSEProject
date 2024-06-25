@@ -23,7 +23,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=temp
       - SPRING_DATASOURCE_PASSWORD=temp123
     ports:
-      - "9090:9090"
+      - "9990:9990"
 
 volumes:
   postgres-data:
