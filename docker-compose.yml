@@ -1,7 +1,7 @@
 version: "3"
 services:
   devops-db:
-    image: "postgres:latest"
+    image: "postgres"
     container_name: "employees-app"
     environment:
       - POSTGRES_USER=temp
