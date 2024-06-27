@@ -1,0 +1,30 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: mcu-all
+spec:
+  stripPrefix:
+    forceSlash: false
+    prefixes:
+      - /employees
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devops-app-ingress
+  namespace: devops-project
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: 'false'
+    traefik.ingress.kubernetes.io/router.middlewares: default-mcu-all@kubernetescrd
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /employees
+            pathType: Prefix
+            backend:
+              service:
+                name: devops-app-service
+                port:
+                  number: 9990
